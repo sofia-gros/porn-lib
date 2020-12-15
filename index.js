@@ -145,3 +145,4 @@ class XVideos {
     });
   }
 }
+module.exports = Porn;
