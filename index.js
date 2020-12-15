@@ -1,8 +1,13 @@
 const rq = require("request-promise");
 const cheerio = require("cheerio");
 
+
 class Porn {
   _engine = null;
+  /**
+  * @param {string} EngineName - xvideos
+  * @return {Class} EngineClass - engine class
+  */
   engine(engine) {
     switch (engine) {
       case "xvideos":
@@ -16,7 +21,7 @@ class Porn {
 }
 
 /**
- * @type "videos" "list"
+ * Videos
  */
 class Videos {
   title;
@@ -45,6 +50,10 @@ class XVideos {
   page;
   site_url = "https://www.xvideos.com";
   url;
+  /**
+   * @param {Object} prop - {keywords, page}
+   * @return {Array[Videos]}
+   */
   search(prop) {
     this.keywords = "keywords" in prop ? typeof prop.keywords == "object" ? prop.keywords : [prop.keywords] : null;
     this.page = "page" in prop ? ++prop.page : 1;
@@ -111,12 +120,3 @@ class XVideos {
     });
   }
 }
-
-
-
-
-
-
-const porn = new Porn();
-const xvideos = porn.engine("xvideos");
-xvideos.search({ keywords: ["single girl"], page: 0 }).then(a => console.log(a));

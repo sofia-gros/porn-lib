@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "keywords": [
+    "pron",
+    "xvideos",
+    "pornhub",
+    "lib",
+    "porn-lib"
+  ],
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.2",
