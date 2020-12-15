@@ -4,6 +4,9 @@
 For now, only xvideos is supported.
 You can only use search.
 
+####github
+https://github.com/darpakyokutyou/porn-lib
+
 ######sample code
 ```javascript:sample code
 const porn = new Porn();
