@@ -12,6 +12,26 @@ https://github.com/darpakyokutyou/porn-lib
 const porn = new Porn();
 const xvideos = porn.engine("xvideos");
 xvideos.search({ keywords: ["fuck"], page: 0 }).then(a => console.log(a));
+
+// new update 1.2.0
+const porn = new Porn();
+const xvideos = porn.engine("xvideos");
+const searchQuery = xvideos.search({
+  keywords: ["cute"]
+});
+searchQuery.then(v => {
+  const video = porn.iterator(v);
+  console.log(video.next());
+  console.log(video.next());
+  console.log(video.next());
+});
+xvideos.nextPage().then(v => {
+  const video = porn.iterator(v);
+  console.log(video.next());
+  console.log(video.next());
+  console.log(video.next());
+});
+
 ```
 ######type
 ```console

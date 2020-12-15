@@ -18,6 +18,13 @@ class Porn {
         break;
     }
   }
+  * iterator(videos) {
+    let iterationCount = 0;
+    for (let i = 0; i < videos.length; i++) {
+      iterationCount++;
+      yield videos[iterationCount];
+    }
+  }
 }
 
 /**
@@ -55,15 +62,33 @@ class XVideos {
    * @return {Array[Videos]}
    */
   search(prop) {
-    this.keywords = "keywords" in prop ? typeof prop.keywords == "object" ? prop.keywords : [prop.keywords] : null;
+    this.keywords = "keywords" in prop ? typeof prop.keywords == "object" ? prop.keywords.join("+") : prop.keywords : null;
     this.page = "page" in prop ? ++prop.page : 1;
     this.url = {
       url: this.site_url,
       qs: {
-        k: this.keywords.join("+"),
+        k: this.keywords,
         p: this.page
       }
     };
+    return this.allin();
+  }
+  categorySearch(prop) {
+    this.page = "page" in prop ? ++prop.page : 1;
+    this.url = {
+      url: `${this.site_url}/c/${prop.category}/${page}`
+    };
+    return this.allin();
+  }
+  nextPage() {
+    this.page = "page" in this ? ++this.page : 1;
+    return this.allin();
+  }
+  backPage() {
+    this.page = "page" in this ? --this.page : 1;
+    return this.allin();
+  }
+  allin() {
     return new Promise(resolve => {
       rq({
         ...this.url,
