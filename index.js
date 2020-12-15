@@ -69,7 +69,6 @@ class XVideos {
           const videos = new Videos();
           videos.title = $(elm).find(".thumb-under > p > a").text();
           videos.gif = $(elm).find(".thumb-inside > .thumb img").attr("src");
-          console.log($(elm).find(".thumb-inside > .thumb img"))
           videos.video_url = this.site_url + $(elm).find(".thumb-inside > .thumb").children("a").attr("href");
           data = new Promise(resolve2 => {
             rq({
@@ -120,4 +119,4 @@ class XVideos {
 
 const porn = new Porn();
 const xvideos = porn.engine("xvideos");
-xvideos.search({ keywords: ["fuck"], page: 0 }).then(a => console.log(a));
+xvideos.search({ keywords: ["single girl"], page: 0 }).then(a => console.log(a));
