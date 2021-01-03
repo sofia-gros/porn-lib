@@ -32,6 +32,15 @@ xvideos.nextPage().then(v => {
   console.log(video.next());
 });
 
+// new update 1.4.1
+// download video
+xvideos.nextPage().then(v => {
+  const video = porn.iterator(v);
+  const fst_video = video.next();
+  //fst_video.value.dl("Quality", "[__dirname +] directory");
+  fst_video.value.dl("low", "./download");
+});
+
 ```
 ######type
 ```console
@@ -42,6 +51,7 @@ class Videos {
   video_url;
   video_direct_url;
   quality;
+  dl();
 }
 ```
 
@@ -58,7 +68,8 @@ class Videos {
       high: null,
       hls: null
     },
-    quality: [ 'row' ]
+    quality: [ 'row' ],
+    dl()
   }
 ]
 ```
