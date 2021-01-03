@@ -1,5 +1,9 @@
 const rq = require("request-promise");
 const cheerio = require("cheerio");
+// const http = require("http");
+const http = require("https");
+const fs = require("fs");
+const path = require("path");
 
 
 class Porn {
@@ -20,7 +24,7 @@ class Porn {
   }
   * iterator(videos) {
     let iterationCount = 0;
-    for (let i = 0; i < videos.length; i++) {
+    for (const i in videos) {
       iterationCount++;
       yield videos[iterationCount];
     }
@@ -45,6 +49,13 @@ class Videos {
     this.video_direct_url = video_direct_url;
     this.quality = quality;
     return this;
+  }
+  dl = (quality = "low", dir = null) => {
+    const dl = new DL();
+    dl.name(this.title);
+    if (dir) dl.dir(path.join(__dirname, dir));
+    if (quality in this.video_direct_url) dl.url(this.video_direct_url[quality]);
+    dl.download();
   }
 }
 
@@ -128,7 +139,7 @@ class XVideos {
               resolve2({
                 category,
                 video_direct_url,
-                quality: [low && "row", high && "high", hls && "hls"].filter(v => v)
+                quality: [low && "low", high && "high", hls && "hls"].filter(v => v)
               });
             });
           }).then(res => {
@@ -145,4 +156,27 @@ class XVideos {
     });
   }
 }
+
+class DL {
+  _dir = "";
+  _url = "";
+  _name = "";
+  download() {
+    const req = http.get(this._url, res => {
+      const outFile = fs.createWriteStream(path.join(this._dir, this._name + ".mp4"));
+      res.pipe(outFile);
+      res.on("end", () => outFile.close());
+    });
+  }
+  name(name) {
+    this._name = name;
+  }
+  url(url) {
+    this._url = url;
+  }
+  dir(dir) {
+    this._dir = dir;
+  }
+}
+
 module.exports = Porn;
