@@ -1,4 +1,8 @@
 
+
+This library is obsolete. there is a new library reconstituted in python
+https://github.com/sofia-gros/porn-lib-python/blob/main/README.md
+
 ##Many more features to come!
 
 For now, only xvideos is supported.
